@@ -1,8 +1,8 @@
-The ```browser``` field is provided by a module author as a hint to javascript bundlers or component tools when preparing modules for client side use.
+The ```browser``` field is provided by a module author as a hint to javascript bundlers or component tools when packaging modules for client side use. The field is found in a ```package.json``` file (described [here](http://browsenpm.org/package.json)) usually located at the root of a project source tree.
 
 ## terms
 
-Below are common terms used in the rest of the document
+Below are common terms used in the rest of the document.
 
 ### server
 > This is a non-dom based javascript execution environment. It usually only contains the base javascript language spec libraries and objects along with modules to communicate with OS features (available through commonjs require).
@@ -17,28 +17,30 @@ Below are common terms used in the rest of the document
 > A tool which takes a plain javascript package and creates client usable files. It may include, but is not limited to: replacing modules or files with client versions (since the client may already provide the functionality), merging all the dependencies into a single file, etc.
 
 ### package.json
-> Metadata information about a module.
+> Metadata information about a module. Usually found at the root of the project source tree.
 
 ### packaging
 > The use of a bundler to create a file(s) suitable for running on a client.
 
-## overview
+## Overview
 
 When a javascript module is prepared for use on a client there are two major concerns: certain features are already provided by the client, and certain features are not available. Features provided by a client can include http requests, websockets, dom manipulation. Features not available would include tcp sockets, system disk IO.
 
 The ```browser``` field is where the module author can hint to the bundler which elements (other modules or source files) need to be replaced when packaging.
 
-## spec
+## Spec
 
 ### alternate main - basic
 
-When you specify a single string for the ```browser``` field, it will replace ```main``` and be the module entry point.
+When you specify a single string for the ```browser``` field, it will replace ```main``` and be the module entry point. The ```main``` field specifies the entry point to the module so by replacing it, you replace the entry point when the module is packaged by a bundler for browser use.
 
 ```javascript
 "browser": "./browser/specific/main.js"
 ```
 
 Whenever another module ```requires``` your module by name, the bundler will load javascript from ```./browser/specific/main.js``` instead of the typical ```main``` field entry point (or index.js by default).
+
+All paths for browser fields are relative to the ```package.json``` file location (and usually project root as a result).
 
 ### replace specific files - advanced
 
@@ -72,13 +74,13 @@ The above will cause the following to return an empty object into `a`.
 var a = require('module-a');
 ```
 
-Note: The use of `false` should be restructed to only the most essential places in your app code where other browser field approaches do not work. It is discouraged but sometimes a necessary approach.
+Note: The use of `false` should be restricted to only the most essential places in your app code where other browser field approaches do not work. It is discouraged but sometimes a necessary approach to blacklist a module from client packaging.
 
-## advantages
+## Advantages
 
 Using the ```browser``` field in package.json allows a module author to clearly articulate which files are innapropriate for client use and provide alternatives. It allows the module code (and subsequently dependants on the module) to not use preprocessor hacks, source code changes, or runtime detection hacks to identify which code is appropriate when creating a client bound package.
 
-## notes
+## Notes
 
 * If your module is pure javascript and can run in both client and server environments, then you do not need a browser field.
 * The ```browser``` field is located in the ```package.json``` file as it provides metadata in the form of a hint to bundlers about what files you have indicated are targeted for the client. It allows your source code to remain clean and free of hacks.

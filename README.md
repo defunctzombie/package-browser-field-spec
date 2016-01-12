@@ -57,7 +57,7 @@ When using an object. The left hand side (key) is the name of a module or file y
 
 Now when you package your code, uses of ```module-a``` will be replaced with code from ```./shims/module-a.js``` versus the module code itself and anytime ```./server/only.js``` is used, it will be replaced with ```./shims/client-only.js```
 
-If a module you depend on already includes a ```browser``` field, then you don't have to do anything special. Whenever you require that module, the bundler SHOULD use the hint provided by the module. The [ws](https://github.com/einaros/ws) module is an example of this behavior.
+If a module you depend on already includes a ```browser``` field, then you don't have to do anything special. Whenever you require that module, the bundler SHOULD use the hint provided by the module.
 
 ### ignore a module
 You can simply prevent a module or file from being loaded into a bundle by specifying a value of ```false``` for any of the keys. This is useful if you know certain codepaths will not be executed client side but find it awkward to split up or change the code structure.

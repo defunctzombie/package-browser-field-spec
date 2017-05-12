@@ -1,20 +1,20 @@
-The ```browser``` field is provided by a module author as a hint to javascript bundlers or component tools when packaging modules for client side use. The field is found in a ```package.json``` file (described [here](http://browsenpm.org/package.json)) usually located at the root of a project source tree.
+The ```browser``` field is provided by a module author as a hint to JavaScript bundlers or component tools when packaging modules for client side use. The field is found in a ```package.json``` file (described [here](http://browsenpm.org/package.json)) usually located at the root of a project source tree.
 
 ## terms
 
 Below are common terms used in the rest of the document.
 
 ### server
-> This is a non-dom based javascript execution environment. It usually only contains the base javascript language spec libraries and objects along with modules to communicate with OS features (available through commonjs require).
+> This is a non-dom based JavaScript execution environment. It usually only contains the base JavaScript language spec libraries and objects along with modules to communicate with OS features (available through commonjs require).
 
 ### client
-> This is a browser execution environment. It may provide additional built in objects exposed in the global namespace. It is a specialized execution environment which provides builtin capabilities beyond the base javascript language spec.
+> This is a browser execution environment. It may provide additional built in objects exposed in the global namespace. It is a specialized execution environment which provides builtin capabilities beyond the base JavaScript language spec.
 
 ### commonjs
 > A require system for specifying which modules or files a particular file uses.
 
 ### bundler
-> A tool which takes a plain javascript package and creates client usable files. It may include, but is not limited to: replacing modules or files with client versions (since the client may already provide the functionality), merging all the dependencies into a single file, etc.
+> A tool which takes a plain JavaScript package and creates client usable files. It may include, but is not limited to: replacing modules or files with client versions (since the client may already provide the functionality), merging all the dependencies into a single file, etc.
 
 ### package.json
 > Metadata information about a module. Usually found at the root of the project source tree.
@@ -24,7 +24,7 @@ Below are common terms used in the rest of the document.
 
 ## Overview
 
-When a javascript module is prepared for use on a client there are two major concerns: certain features are already provided by the client, and certain features are not available. Features provided by a client can include http requests, websockets, dom manipulation. Features not available would include tcp sockets, system disk IO.
+When a JavaScript module is prepared for use on a client there are two major concerns: certain features are already provided by the client, and certain features are not available. Features provided by a client can include http requests, websockets, dom manipulation. Features not available would include tcp sockets, system disk IO.
 
 The ```browser``` field is where the module author can hint to the bundler which elements (other modules or source files) need to be replaced when packaging.
 
@@ -38,7 +38,7 @@ When you specify a single string for the ```browser``` field, it will replace ``
 "browser": "./browser/specific/main.js"
 ```
 
-Whenever another module ```requires``` your module by name, the bundler will load javascript from ```./browser/specific/main.js``` instead of the typical ```main``` field entry point (or index.js by default).
+Whenever another module ```requires``` your module by name, the bundler will load JavaScript from ```./browser/specific/main.js``` instead of the typical ```main``` field entry point (or index.js by default).
 
 All paths for browser fields are relative to the ```package.json``` file location (and usually project root as a result).
 
@@ -82,6 +82,6 @@ Using the ```browser``` field in package.json allows a module author to clearly 
 
 ## Notes
 
-* If your module is pure javascript and can run in both client and server environments, then you do not need a browser field.
+* If your module is pure JavaScript and can run in both client and server environments, then you do not need a browser field.
 * The ```browser``` field is located in the ```package.json``` file as it provides metadata in the form of a hint to bundlers about what files you have indicated are targeted for the client. It allows your source code to remain clean and free of hacks.
 * Consider that the client environment as the special case as it exposes objects into the global space to provide certain features and limits others.

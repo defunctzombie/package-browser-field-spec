@@ -78,7 +78,7 @@ Note: The use of `false` should be restricted to only the most essential places 
 
 ## Advantages
 
-Using the ```browser``` field in package.json allows a module author to clearly articulate which files are innapropriate for client use and provide alternatives. It allows the module code (and subsequently dependants on the module) to not use preprocessor hacks, source code changes, or runtime detection hacks to identify which code is appropriate when creating a client bound package.
+Using the ```browser``` field in package.json allows a module author to clearly articulate which files are inappropriate for client use and provide alternatives. It allows the module code (and subsequently dependants on the module) to not use preprocessor hacks, source code changes, or runtime detection hacks to identify which code is appropriate when creating a client bound package.
 
 ## Notes
 

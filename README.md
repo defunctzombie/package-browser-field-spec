@@ -1,4 +1,4 @@
-The ```browser``` field is provided by a module author as a hint to javascript bundlers or component tools when packaging modules for client side use. The field is found in a ```package.json``` file (described [here](http://browsenpm.org/package.json)) usually located at the root of a project source tree.
+The ```browser``` field is provided by a module author as a hint to javascript bundlers or component tools when packaging modules for client side use. The field is found in a ```package.json``` file (described [here](https://docs.npmjs.com/files/package.json#browser)) usually located at the root of a project source tree.
 
 ## terms
 

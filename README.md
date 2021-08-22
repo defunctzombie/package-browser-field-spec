@@ -42,6 +42,12 @@ Whenever another module ```requires``` your module by name, the bundler will loa
 
 All paths for browser fields are relative to the ```package.json``` file location (and usually project root as a result).
 
+The replacement is resolved similar to how `require` works, so you can replace with a specific file or also another module:
+
+```javascript
+"browser": "some-shim"
+```
+
 ### replace specific files - advanced
 
 In many cases, there is a large amount of code which is applicable to both client and server. If is easier to just replace some files instead of creating a completely new entry point. To do this, just specify an object versus a single string.
@@ -59,6 +65,15 @@ Now when you package your code, uses of ```module-a``` will be replaced with cod
 
 If a module you depend on already includes a ```browser``` field, then you don't have to do anything special. Whenever you require that module, the bundler SHOULD use the hint provided by the module.
 
+The replacement is resolved similar to how `require` works, so you can replace with a specific file or also another module:
+
+```javascript
+"browser": {
+    "module-a": "foo",
+    "./server/only.js": "bar"
+}
+```
+
 ### ignore a module
 You can simply prevent a module or file from being loaded into a bundle by specifying a value of ```false``` for any of the keys. This is useful if you know certain codepaths will not be executed client side but find it awkward to split up or change the code structure.
 
@@ -72,6 +87,13 @@ You can simply prevent a module or file from being loaded into a bundle by speci
 The above will cause the following to return an empty object into `a`.
 ```javascript
 var a = require('module-a');
+```
+
+Sometimes an empty object is not the most convenient value. For example, if normally a function is expected, it may be preferable to replace with an empty function rather than empty object. In that case, you could specify to replace with the `noop` or `identity` function: 
+
+```javascript
+"browser": "utilise.identity"
+"browser": "utilise.noop"
 ```
 
 Note: The use of `false` should be restricted to only the most essential places in your app code where other browser field approaches do not work. It is discouraged but sometimes a necessary approach to blacklist a module from client packaging.
